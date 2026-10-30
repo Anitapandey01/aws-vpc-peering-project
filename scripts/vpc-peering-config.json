@@ -1,0 +1,39 @@
+{
+  "project": "EWB VPC Peering",
+  "region": "ap-south-1",
+  "vpcs": [
+    {
+      "name": "ewb-vpc-a",
+      "cidr": "10.10.0.0/16",
+      "subnets": [
+        {
+          "name": "ewb-a-public",
+          "cidr": "10.10.1.0/24",
+          "type": "public"
+        },
+        {
+          "name": "ewb-a-private",
+          "cidr": "10.10.2.0/24",
+          "type": "private"
+        }
+      ]
+    },
+    {
+      "name": "ewb-vpc-b",
+      "cidr": "10.20.0.0/16",
+      "subnets": [
+        {
+          "name": "ewb-b-private",
+          "cidr": "10.20.1.0/24",
+          "type": "private"
+        }
+      ]
+    }
+  ],
+  "peering": {
+    "name": "ewb-a-b-peer",
+    "source": "ewb-vpc-a",
+    "destination": "ewb-vpc-b",
+    "status_required": "active"
+  }
+}

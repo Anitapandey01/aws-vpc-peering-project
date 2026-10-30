@@ -1,0 +1,78 @@
+
+{
+  "route_tables": [
+    {
+      "name": "ewb-rt-a-public",
+      "routes": [
+        {
+          "destination": "0.0.0.0/0",
+          "target": "ewb-igw-a"
+        },
+        {
+          "destination": "10.20.0.0/16",
+          "target": "ewb-a-b-peer"
+        }
+      ]
+    },
+    {
+      "name": "ewb-rt-a-private",
+      "routes": [
+        {
+          "destination": "10.20.0.0/16",
+          "target": "ewb-a-b-peer"
+        }
+      ]
+    },
+    {
+      "name": "ewb-rt-b-private",
+      "routes": [
+        {
+          "destination": "10.10.0.0/16",
+          "target": "ewb-a-b-peer"
+        }
+      ]
+    }
+  ],
+  "security_groups": [
+    {
+      "name": "ewb-sg-bastion",
+      "inbound": [
+        {
+          "protocol": "tcp",
+          "port": 22,
+          "source": "YOUR_PUBLIC_IP/32"
+        }
+      ]
+    },
+    {
+      "name": "ewb-sg-app-a",
+      "inbound": [
+        {
+          "protocol": "tcp",
+          "port": 22,
+          "source": "10.10.1.10/32"
+        },
+        {
+          "protocol": "icmp",
+          "type": 8,
+          "source": "10.20.1.10/32"
+        }
+      ]
+    },
+    {
+      "name": "ewb-sg-app-b",
+      "inbound": [
+        {
+          "protocol": "tcp",
+          "port": 22,
+          "source": "10.10.1.10/32"
+        },
+        {
+          "protocol": "icmp",
+          "type": 8,
+          "source": "10.10.2.10/32"
+        }
+      ]
+    }
+  ]
+}
